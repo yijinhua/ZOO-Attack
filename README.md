@@ -98,6 +98,16 @@ out loss every 10 iterations. Save attack images to folder `imagenet_untargeted`
 python3 test_all.py --untargeted -a black -d imagenet -n 150 --solver adam -b 1 -c 10.0 --use_resize --reset_adam -m 1500 -p 10 -s "imagenet_untargeted"
 ```
 
+To perform untargeted attack on the ClarifAI API moderation model with 1 image, with ZOO-ADAM solver, do not binary search the regularization parameter (i.e., search only 1
+time), and set the initial regularization parameter to a fixed value (10.0). Use
+attack-space dimension reduction with image resizing, and reset ADAM states
+when the first attack is found.  Run a maximum of 500 iterations, and print
+out loss every 10 iterations. Save attack images to folder `imagenet_untargeted_500` every 10 iterations.
+
+```
+python3 test_all_clarifai.py --untargeted -a black -d imagenet -n 1 --solver adam -b 1 -c 10.0 --use_resize --reset_adam -m 500 -p 10 -s "imagenet_untargeted_500"
+```
+
 Run ZOO black-box targeted attack, on the imagenet dataset, with the 69th image
 only.  Set the regularization parameter to 10.0 and do not binary search. Use
 attack-space dimension reduction and hierarchical attack with image resizing,
